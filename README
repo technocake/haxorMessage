@@ -1,0 +1,11 @@
+##	haxorMessage
+
+Gives the haxor a neat interface to send message to his victim a.k.a nemesis
+
+#	Usage
+run the python file
+
+	python haxorMessage.py
+
+then it will wait for a victim to connect.
+You can then send him messages interactively. The victim can't reply!
