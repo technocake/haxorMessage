@@ -10,10 +10,6 @@ import socket, sys
 
 HOST, PORT = '', 8888
 
-s = socket.socket()
-
-s.bind((HOST, PORT))
-s.listen(1)
 
 HTML_HEAD = """HTTP/1.1 200
 
@@ -72,6 +68,12 @@ MSG_WRAPS = """
 HTML_TAIL = """    <h1 id="warning" class="black">&lt;Connection reset by server&gt;</h1>
 </html>
 """
+s = socket.socket()
+#Making it able to restart asap on quit ;) (not waiting for TIME_WAIT to expire)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+s.bind((HOST, PORT))
+s.listen(1)
+
 try:
 	while True:		
 		try:
