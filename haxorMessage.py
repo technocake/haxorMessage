@@ -33,6 +33,10 @@ HTML_HEAD = """HTTP/1.1 200
             -o-transition-property: color;
             -o-transition-duration: 1s;
         }
+        h1, h2, h3, h4, h5, p, a {
+            color: green;
+            font-family: monospace;
+        }
     </style>
     <script>
         function setBlack(e) {
