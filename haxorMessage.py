@@ -61,7 +61,7 @@ HTML_HEAD = """
 			element = document.getElementById('prompt');
 			if (keynum == 13) {
 				element.class = "";
-				ver newP = document.createElement('p');
+				var newP = document.createElement('p');
 				newP.setAttribute('class', 'prompt');
 				newP.innerHTML = '&gt;';
 			} else {
@@ -81,7 +81,7 @@ HTML_TAIL = """	<h1 id="warning" class="black">&lt;Connection reset by server&gt
 """
 s = socket.socket()
 #Making it able to restart asap on quit ;) (not waiting for TIME_WAIT to expire)
-#s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 s.bind((HOST, PORT))
 s.listen(1)
 
