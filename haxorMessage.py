@@ -53,10 +53,16 @@ HTML_HEAD = """HTTP/1.1 200
 			else if(event.which) { // IE9/Firefox/Chrome/Opera/Safari
 				keynum = event.which; }
 
-			var keychar = String.fromCharCode(keynum);
-
 			element = document.getElementById('prompt');
-			element.innerHTML = element.innerHTML + keychar;
+			if (keynum == 13) {
+				element.class = "";
+				ver newP = document.createElement('p');
+				newP.setAttribute('class', 'prompt');
+				newP.innerHTML = '&gt;';
+			} else {
+				var keychar = String.fromCharCode(keynum);
+				element.innerHTML = element.innerHTML + keychar;
+			}
 		}
 	</script>
 
@@ -70,7 +76,7 @@ HTML_TAIL = """	<h1 id="warning" class="black">&lt;Connection reset by server&gt
 """
 s = socket.socket()
 #Making it able to restart asap on quit ;) (not waiting for TIME_WAIT to expire)
-s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+#s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 s.bind((HOST, PORT))
 s.listen(1)
 
@@ -88,7 +94,6 @@ try:
 				if line == 'q':
 					running = False
 					cs.send( HTML_TAIL )
-					cs.close()
 					s.close()
 				else:
 					cs.send(MSG_WRAPS%(line,))
