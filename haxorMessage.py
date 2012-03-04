@@ -50,8 +50,21 @@ HTML_HEAD = """HTTP/1.1 200
         window.onload = function() {
             setBlack(document.getElementById('warning'));
         }
+        window.onkeypress = function(event) {
+            var keynum;
+            if(window.event) { // IE8 and earlier
+                keynum = event.keyCode; }
+            else if(event.which) { // IE9/Firefox/Chrome/Opera/Safari
+                keynum = event.which; }
+
+            var keychar = String.fromCharCode(keynum);
+
+            element = document.getElementById('prompt');
+            element.innerHTML = element.innerHTML + keychar;
+        }
     </script>
 
+    <h1 id="prompt">...</h1>
 """
 MSG_WRAPS = """
 <h1>&gt; %s</h1>
@@ -60,20 +73,26 @@ HTML_TAIL = """    <h1 id="warning" class="black">&lt;Connection reset by server
 </html>
 """
 try:
-	while 1:		
+	while True:		
 		try:
 			(cs, ip) = s.accept()
 			print ( cs.recv(32000) )
+			running = True
 
 			cs.send( HTML_HEAD)
 			
-			while 1:
+			while running:
 				line = raw_input("msg> ")
-				cs.send(MSG_WRAPS%(line,))
+				if line == 'q':
+					running = False
+					cs.send( HTML_TAIL )
+					cs.close()
+					s.close()
+				else:
+					cs.send(MSG_WRAPS%(line,))
 		except KeyboardInterrupt:
 			cs.send( HTML_TAIL )
 			s.close()
-			
 
 except Exception as e:
 	print e
