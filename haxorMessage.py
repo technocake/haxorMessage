@@ -30,8 +30,9 @@ try:
 		(cs, ip) = s.accept()
 		print ( cs.recv(32000) )
 
+		cs.send( HTML_HEAD)
+		
 		while 1:
-			cs.send( HTML_HEAD)
 			line = raw_input("msg> ")
 			cs.send(MSG_WRAPS%(line,))
 except Exception as e:
