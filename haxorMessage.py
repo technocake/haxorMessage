@@ -10,8 +10,13 @@ import socket, sys
 
 HOST, PORT = '', 8888
 
+HTML_HEADERS = """HTTP/1.1 200
+Cache-Control: no-cache;
+Content-Type: text/html; charset=utf-8;
 
-HTML_HEAD = """HTTP/1.1 200
+"""
+
+HTML_HEAD = """
 
 <!DOCTYPE html>
 <html>
@@ -87,7 +92,7 @@ try:
 			print ( cs.recv(32000) )
 			running = True
 
-			cs.send( HTML_HEAD)
+			cs.send(HTML_HEADERS + HTML_HEAD)
 			
 			while running:
 				line = raw_input("msg> ")
