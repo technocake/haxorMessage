@@ -54,7 +54,7 @@ HTML_HEAD = """HTTP/1.1 200
 
 """
 MSG_WRAPS = """
-<h1>%s</h1>
+<h1>&gt; %s</h1>
 """
 HTML_TAIL = """    <h1 id="warning" class="black">&lt;Connection reset by server&gt;</h1>
 </html>
