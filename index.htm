@@ -1,0 +1,35 @@
+<!DOCTYPE htmml>
+<html>
+    <style>
+        body {
+            background-color: black;
+        }
+        .black {
+            color: black;
+            -o-transition-property: color;
+            -o-transition-duration: 1s;
+        }
+        .red {
+            color: red;
+            -o-transition-property: color;
+            -o-transition-duration: 1s;
+        }
+    </style>
+    <script>
+        function setBlack(e) {
+            e.className = 'black';
+            setTimeout("setRed(document.getElementById('warning'))", 1000);
+        }
+        function setRed(e) {
+            e.className = 'red';
+            setTimeout("setBlack(document.getElementById('warning'))", 1000);
+        }
+        window.onload = function() {
+            setBlack(document.getElementById('warning'));
+        }
+    </script>
+
+
+    <h1 id="warning" class="black">&lt;Connection reset by server&gt;</h1>
+</html>
+
