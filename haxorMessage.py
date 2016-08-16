@@ -84,7 +84,7 @@ s = socket.socket()
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 s.bind((HOST, PORT))
 s.listen(1)
-
+print("Send them to %s:%d" % (HOST, PORT))
 try:
 	while True:		
 		try:
